@@ -25,6 +25,7 @@ urlpatterns = [
     path("rest/v1/", include('apirest.urls'), name='rest_apirest'),
     path("rest/v1/", wagtailapi_router.urls, name='rest_wagtailapi_router'),
 
+    path('rest/v1/auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 ]
 

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from datetime import timedelta
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -128,6 +129,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'users.User'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -182,6 +185,23 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 WAGTAILAPI_BASE_URL = 'http://localhost:8000'
 
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # Tiempo de vida del token de acceso
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=60),  # Tiempo de vida del token de refresco
+    'ROTATE_REFRESH_TOKENS': True,  # Si True, se rotarán los tokens de refresco
+    'BLACKLIST_AFTER_ROTATION': True,  # Si True, se agregan los tokens rotados a una lista negra
+    'UPDATE_LAST_LOGIN': False,  # Si True, actualiza la fecha del último inicio de sesión
+    'ALGORITHM': 'HS256',  # Algoritmo de encriptación
+    'SIGNING_KEY': os.getenv('SIGNING_KEYBLACKLIST_AFTER_ROTATION', 'SIGNING_KEY'),  # Clave secreta para firmar los tokens
+    'VERIFYING_KEY': None,  # Clave pública para verificar los tokens (si se usa)
+    'AUTH_HEADER_TYPES': ('Bearer',),  # Tipo de encabezado de autorización
+    'USER_ID_FIELD': 'id',  # Campo del modelo que se usará como identificador
+    'USER_ID_CLAIM': 'user_id',  # Reclamación del identificador del usuario en el token
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+}
+
+
+
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk
 # if untrusted users are allowed to upload files -
@@ -193,4 +213,24 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',  # Habilita la interfaz de exploración
     ],
+    'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        #'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'users.managers.CustomJWTAuthentication',
+        #"'usuarios.managers.CustomRefreshToken',
+        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_THROTTLE_CLASSES': (
+            'rest_framework.throttling.AnonRateThrottle',
+            'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.FormParser',
+    ),
+    # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
