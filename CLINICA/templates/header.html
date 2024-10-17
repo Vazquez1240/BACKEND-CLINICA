@@ -10,10 +10,12 @@
         <q-toolbar style="display: grid; grid-template-columns: repeat(2, auto); padding: 1rem; grid-gap: 3px;">
           <p style="font-size: 1.5rem; justify-content: start; cursor:pointer;"class="text-pink-8">{{ page.title }}</p>
           <div style="display: flex; justify-content: space-around">
-              <p style="cursor:pointer;" class="text-pink-8">Nosotros</p>
-              <p style="cursor:pointer;"class="text-pink-8">Servicios</p>
-              <p style=" cursor:pointer;"class="text-pink-8">Galería</p>
-              <p style=" cursor:pointer;"class="text-pink-8">Contacto</p>
+              {% for foo in page.opciones_navegacion %}
+                  {% if foo.value.activo %}
+                    <p style="cursor:pointer;" class="text-pink-8">{{ foo.value.opcion }}</p>
+                  {% endif %}
+              {% endfor %}
+
           </div>
         </q-toolbar>
       </q-header>
