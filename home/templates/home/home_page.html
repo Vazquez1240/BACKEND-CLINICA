@@ -5,8 +5,9 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
-<!-- replace everything below with: -->
 {% block content %}
-    {% load wagtailcore_tags %}
-    {{ page.body|richtext }}
+    <div>
+        {{ page.titulo|richtext }}
+        {{ page.descripcion|richtext }}
+    </div>
 {% endblock %}

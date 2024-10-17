@@ -1,0 +1,23 @@
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+
+{% block body_class %}{% endblock %}
+
+{% block header %}
+    <q-layout view="hHh lpR fFf" style="min-height: 110px; max-height: 200px">
+  <!-- Configuración de layout -->
+      <q-header elevated class="bg-grey-1" style="display: flex; flex-direction: row; width: 100%; justify-content: space-between">
+        <q-toolbar style="display: grid; grid-template-columns: repeat(2, auto); padding: 1rem; grid-gap: 3px;">
+          <p style="font-size: 1.5rem; justify-content: start; cursor:pointer;"class="text-pink-8">{{ page.title }}</p>
+          <div style="display: flex; justify-content: space-around">
+              <p style="cursor:pointer;" class="text-pink-8">Nosotros</p>
+              <p style="cursor:pointer;"class="text-pink-8">Servicios</p>
+              <p style=" cursor:pointer;"class="text-pink-8">Galería</p>
+              <p style=" cursor:pointer;"class="text-pink-8">Contacto</p>
+          </div>
+        </q-toolbar>
+      </q-header>
+</q-layout>
+
+{% endblock %}
+

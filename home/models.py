@@ -4,13 +4,16 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.api.v2.views import PagesAPIViewSet
 from wagtail.api import APIField
 
-class HomePage(PagesAPIViewSet):
-    body = RichTextField(blank=True)
+class HomePage(Page):
+    titulo = RichTextField(blank=True)
+    descripcion = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('body'),
+        FieldPanel('titulo'),
+        FieldPanel('descripcion'),
     ]
 
     api_fields = [
-        APIField('body'),
+        APIField('titulo'),
+        APIField('descripcion'),
     ]
