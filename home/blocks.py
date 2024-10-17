@@ -1,7 +1,8 @@
 from wagtail.blocks import ChoiceBlock, StructBlock, BooleanBlock, URLBlock
+from wagtail.images.blocks import ImageChooserBlock
 
 
-class NavegacionPrincipal(StructBlock):
+class NavegacionPrincipalBlock(StructBlock):
     opcion = ChoiceBlock(choices=[
         ('Nosotros', 'Nosotros'),
         ('Servicios', 'Servicios'),
@@ -13,3 +14,11 @@ class NavegacionPrincipal(StructBlock):
     activo = BooleanBlock(required=False,  default=False, help_text="¿Está activo?")
 
     url = URLBlock(help_text='ingrese la pagina a la que va (Ejemplo si es el de servicio seria /servicios)', required=True)
+
+
+class PortadaBlock(StructBlock):
+    imagen = ImageChooserBlock(required=True)
+
+    class Meta:
+        icon = 'image'
+        label = 'Portada'

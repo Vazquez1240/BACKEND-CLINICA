@@ -3,28 +3,33 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel
 from wagtail.api import APIField
-from .blocks import NavegacionPrincipal
+from .blocks import NavegacionPrincipalBlock,PortadaBlock
 
 
 
 class HomePage(Page):
     titulo = RichTextField(blank=True)
     descripcion = RichTextField(blank=True)
+    portada = StreamField([
+        ('portada', PortadaBlock())
+    ], blank=True)
 
     opciones_navegacion = StreamField([
-        ('opcion_navegacion', NavegacionPrincipal()),
+        ('opcion_navegacion', NavegacionPrincipalBlock()),
     ], blank=True)
 
 
     content_panels = Page.content_panels + [
         FieldPanel('titulo'),
         FieldPanel('descripcion'),
+        FieldPanel('portada'),
         FieldPanel('opciones_navegacion'),
     ]
 
     api_fields = [
         APIField('titulo'),
         APIField('descripcion'),
+        APIField('portada'),
         APIField('opciones_navegacion'),
     ]
 

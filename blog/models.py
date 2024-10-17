@@ -13,7 +13,7 @@ from wagtail.api import APIField
 class BlogIndexPage(Page):
     descripcion = RichTextField(blank=True)
 
-    content_panels = Page.content_panels + [
+    content_panels = [
         FieldPanel('descripcion'),
     ]
 
