@@ -8,16 +8,16 @@
 {% block content %}
    <div class="q-pa-md full-width">
        <div class="column items-center justify-center">
-            <div class="text-h4 ">{{ page.titulo|richtext }}</div>
-            <div class="text-body1">{{ page.descripcion|richtext }}</div>
-            <div class="full-width flex justify-center">
+            <div class="text-h4 text-pink-8">{{ page.titulo|richtext }}</div>
+            <div class="text-body1 text-grey-10">{{ page.descripcion|richtext }}</div>
+            <div class="flex justify-center" style="height: 60%">
                 {% for block in page.portada %}
                     {% if block.block_type == 'portada' %}
                         {% with block.value.imagen as imagen_id %}
                             {% image imagen_id fill-800x930 as image %}
                                 <q-card style="width: 60%; height: 60%" class="flex justify-center ">
-                                    <q-cardContent class="flex justify-center">
-                                        <img src="{{ image.url }}" alt="Portada" style="width: 50%; ">
+                                    <q-cardContent class="flex justify-center full-width">
+                                        <img src="{{ image.url }}" alt="Portada" style="width: auto">
                                     </q-cardContent>
                                 </q-card>
                         {% endwith %}
