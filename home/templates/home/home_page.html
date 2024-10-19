@@ -6,12 +6,18 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-   <div class="q-pa-md full-width">
-       <div class="column items-center justify-center">
-            <div class="text-h4 text-pink-8">{{ page.titulo|richtext }}</div>
-            <div class="text-body1 text-grey-10">{{ page.descripcion|richtext }}</div>
-            <div class="flex justify-center" style="height: 60%">
-                {% for block in page.portada %}
+   <div class="q-pa-md full-width" style="margin-top: 2rem">
+       <div class="column items-center justify-center" style="gap: 3rem">
+            <div class="flex column justify-center items-center">
+                {% for block in page.titulo %}
+                    <div class="text-h4 text-{{ block.value.color_texto }}">{{ block.value.texto }}</div>
+                {% endfor %}
+                {% for block in page.descripcion %}
+                    <div class="text-body1 text-{{ block.value.color_texto }}">{{ block.value.texto }}</div>
+                {% endfor %}
+            </div>
+            <div class="flex justify-center" style="height: 50%">
+                <!--{% for block in page.portada %}
                     {% if block.block_type == 'portada' %}
                         {% with block.value.imagen as imagen_id %}
                             {% image imagen_id fill-800x930 as image %}
@@ -22,7 +28,15 @@
                                 </q-card>
                         {% endwith %}
                     {% endif %}
+                {% endfor %} -->
+
+            <div>
+                {% for block in page.boton %}
+                    {% if block.block_type == 'boton' %}
+                        <q-btn class='bg-{{ block.value.color }} text-{{ block.value.color_texto }}'>{{ block.value.texto}}</q-btn>
+                    {% endif %}
                 {% endfor %}
+            </div>
             </div>
        </div>
     </div>

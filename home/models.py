@@ -1,17 +1,21 @@
 from django.core.exceptions import ValidationError
+from .snippets import ClaseColor
 from wagtail.models import Page
-from wagtail.fields import RichTextField, StreamField
+from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
 from wagtail.api import APIField
-from .blocks import NavegacionPrincipalBlock,PortadaBlock
-
+from .blocks import NavegacionPrincipalBlock, ButtonBlock, TextBlock
 
 
 class HomePage(Page):
-    titulo = RichTextField(blank=True)
-    descripcion = RichTextField(blank=True)
-    portada = StreamField([
-        ('portada', PortadaBlock())
+    titulo = StreamField([
+        ('texto', TextBlock()),
+    ])
+    descripcion = StreamField([
+        ('texto', TextBlock()),
+    ])
+    boton = StreamField([
+        ('boton', ButtonBlock()),  # Definirlo como un bloque dentro de StreamField
     ], blank=True)
 
     opciones_navegacion = StreamField([
@@ -22,14 +26,14 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('titulo'),
         FieldPanel('descripcion'),
-        FieldPanel('portada'),
+        FieldPanel('boton'),
         FieldPanel('opciones_navegacion'),
     ]
 
     api_fields = [
         APIField('titulo'),
         APIField('descripcion'),
-        APIField('portada'),
+        APIField('boton'),
         APIField('opciones_navegacion'),
     ]
 
@@ -45,3 +49,4 @@ class HomePage(Page):
 
         if len(opciones) != len(set(opciones)):
             raise ValidationError("Las opciones no pueden repetirse.")
+

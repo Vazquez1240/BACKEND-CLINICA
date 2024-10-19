@@ -13,7 +13,7 @@ from wagtail.api import APIField
 class BlogIndexPage(Page):
     descripcion = RichTextField(blank=True)
 
-    content_panels = [
+    content_panels = Page.content_panels + [
         FieldPanel('descripcion'),
     ]
 
@@ -37,7 +37,11 @@ class BlogPage(Page):
 
     @property
     def title(self):
-        return self.titulo or super().title
+        return self.intro or super().title
+
+    @title.setter
+    def title(self, value):
+        self.intro = value  # O el almacenamiento que prefieras
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
