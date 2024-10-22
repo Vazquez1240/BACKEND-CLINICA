@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from datetime import timedelta
 
+from wagtail.project_template.project_name.settings.base import LANGUAGE_CODE
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -23,6 +25,26 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
 # Application definition
+
+LANGUAGE_CODE = 'es'
+USE_I18N = True
+USE_L10N = True
+
+WAGTAIL_I18N_ENABLED = True
+
+LANGUAGES = [
+    ('en-GB', "English (Great Britain)"),
+    ('en-US', "English (United States)"),
+    ('en-CA', "English (Canada)"),
+    ('fr-FR', "French (France)"),
+    ('fr-CA', "French (Canada)"),
+]
+
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+    ('en', "English"),
+    ('fr', "French"),
+    ('es', "Spanish"),
+]
 
 INSTALLED_APPS = [
     "rest_framework_simplejwt",
@@ -44,6 +66,7 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+    'wagtail.locales',
     "modelcluster",
     "taggit",
     "django.contrib.admin",
@@ -121,11 +144,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
-USE_I18N = True
 
 USE_TZ = True
 
