@@ -7,8 +7,8 @@
 
 {% block content %}
    <div class="q-pa-md full-width" style="margin-top: 2rem">
-       <div class="column items-center justify-center" style="gap: 3rem">
-            <div class="flex column justify-center items-center">
+       <div class="column items-center justify-center" style="gap: 2rem">
+            <div class="flex column justify-center items-center q-gutter-md">
                 {% for block in page.titulo %}
                     <div class="text-h4 text-{{ block.value.color_texto }}">{{ block.value.texto }}</div>
                 {% endfor %}
@@ -16,27 +16,34 @@
                     <div class="text-body1 text-{{ block.value.color_texto }}">{{ block.value.texto }}</div>
                 {% endfor %}
             </div>
-            <div class="flex justify-center" style="height: 50%">
-                <!--{% for block in page.portada %}
-                    {% if block.block_type == 'portada' %}
-                        {% with block.value.imagen as imagen_id %}
-                            {% image imagen_id fill-800x930 as image %}
-                                <q-card style="width: 60%; height: 60%" class="flex justify-center ">
-                                    <q-cardContent class="flex justify-center full-width">
-                                        <img src="{{ image.url }}" alt="Portada" style="width: auto">
-                                    </q-cardContent>
-                                </q-card>
-                        {% endwith %}
-                    {% endif %}
-                {% endfor %} -->
-
+       
+            <div class="flex justify-center">
+                <div>
+                    {% for block in page.boton %}
+                        {% if block.block_type == 'boton' %}
+                            <q-btn class='bg-{{ block.value.color }} text-{{ block.value.color_texto }}'>{{ block.value.texto}}</q-btn>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+       
             <div>
-                {% for block in page.boton %}
-                    {% if block.block_type == 'boton' %}
-                        <q-btn class='bg-{{ block.value.color }} text-{{ block.value.color_texto }}'>{{ block.value.texto}}</q-btn>
+                {% for block in page.servicios %}
+                    {% if block.block_type == 'tituloServicio' %}
+                        <h5 class="text-{{ block.value.color_texto }}">{{ block.value.texto }}</h5>
+                    {% endif %}
+                    {% if block.block_type == 'servicios' %}
+                        <div>
+                          <div class="row contenedor-grid " style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; ">
+                              <div >Item 1</div>
+                              <div >Item 2</div>
+                              <div >Item 3</div>
+                              <div >Item 4</div>
+                          </div>
+                        </div>
                     {% endif %}
                 {% endfor %}
-            </div>
+                
             </div>
        </div>
     </div>

@@ -51,3 +51,12 @@ class TextBlock(StructBlock):
     class Meta:
         icon = 'text'
         label = 'Texto'
+
+
+class ServiciosInicio(StructBlock):
+
+    tituloServicio = CharBlock(required=True)
+    colorTitulo = blocks.SnippetChooserBlock(ClaseColor, required=False, default='primary')
+
+    descripcionServicio = CharBlock(required=True)
+    colorDescripcion = blocks.SnippetChooserBlock(ClaseColor, required=False, default='primary')
